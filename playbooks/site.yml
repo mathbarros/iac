@@ -1,0 +1,28 @@
+- hosts: webservers
+  become: yes
+  tasks:
+    - name: Install do Pache no CentOS
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Enable and Start
+      systemd:
+        name: httpd
+        enabled: yes
+        state: started
+
+- hosts: dbservers
+  become: yes
+  tasks:
+    - name: Install MySQL Database
+      apt:
+        name: mysql-server
+        state: latest
+
+    - name: Enable and Start
+      systemd:
+        name: mysql
+        enabled: yes
+        state: started
+
